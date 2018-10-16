@@ -14,7 +14,8 @@
              class="material-icons katt">
             edit
           </i>
-          <i class="material-icons katt">
+          <i @click="torol(k)"
+             class="material-icons katt">
             delete
           </i>
         </td>
@@ -42,8 +43,8 @@ export default {
         .axios
         .post('http://localhost:3000',this.o)
         .then( resp => {
-          if (resp.data.mentes) {
-            console.log(resp.data.mentes)  
+          if (resp.data.n) {
+            console.log(resp.data)  
           } else {
             this.t.push(resp.data)
           }
@@ -51,6 +52,18 @@ export default {
     },
     szerk(k) {
       this.o = this.t[k]
+    },
+    torol(k) {
+      this
+        .axios
+        .post('http://localhost:3000/del',this.t[k])
+        .then( resp => {
+          if (resp.data.n) {
+            this.t.splice(k,1)  
+          } else {
+         
+          }
+        } )
     }
   },
   mounted() {

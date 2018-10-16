@@ -1,8 +1,10 @@
 var express = require('express')
 var cors = require('cors')
 var bodyParser = require('body-parser')
-var MongoClient = require('mongodb').MongoClient
+var mongo = require('mongodb')
+var MongoClient = mongo.MongoClient
 var app = express()
+const ObjectId = mongo.ObjectID
 app.use(cors())
 app.use(bodyParser.json())
 var db
@@ -30,13 +32,13 @@ app.post('/', (req, res) => {
         console.log(req.body._id)
         let id = req.body._id
         delete req.body._id
-        db.collection('alap')
+        db. collection('alap')
             .updateOne({
-                _id: id
+                _id: ObjectId(id)
             }, { $set: req.body })
             .then( v => {
-                console.log(req.body)
-                res.send({mentve: 1})
+                console.log(v.result)
+                res.send(v.result)
             })
             .catch(
                  console.log
@@ -51,5 +53,21 @@ app.post('/', (req, res) => {
     }
     
 })
+
+
+app.post('/del', (req, res) => {
+    db.collection('alap')
+        .deleteOne({
+            _id: ObjectId(req.body._id)
+        })
+        .then(v => {
+            console.log(v.result)
+            res.send(v.result)
+        })
+        .catch(
+            console.log
+        )
+})
+
 
 app.listen(3000)
