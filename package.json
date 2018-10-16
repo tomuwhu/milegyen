@@ -1,0 +1,24 @@
+{
+  "name": "milegyen",
+  "version": "1.0.0",
+  "description": "Példa",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomuwhu/milegyen.git"
+  },
+  "keywords": [
+    "vue",
+    "mongodb",
+    "express"
+  ],
+  "author": "NT",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomuwhu/milegyen/issues"
+  },
+  "homepage": "https://github.com/tomuwhu/milegyen#readme"
+}
