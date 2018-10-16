@@ -1,11 +1,22 @@
 <template>
   <v-app>
     <v-container class="text-xs-center">
-    <v-text-field v-model="o.nev" label="Név"/>
-    <v-select v-model="o.select" label="Nomi" :items="['Cumó','Cica']" multiple/>
+    <div v-if="edit">  
+    <h1 v-if="o._id">Szerkesztés</h1>  
+    <h1 v-else>Új felvitel</h1>  
+    <v-layout class="row wrap">  
+      <v-flex class="td" xs12 offset-sm1 offset-md1 sm5 md5 lg4 offset-lg2>  
+        <v-text-field v-model="o.nev" label="Név"/>
+      </v-flex>
+      <v-flex  class="td" xs12 sm5 md5 lg4>
+        <v-select v-model="o.select" label="Nomi" :items="['Cumó','Cica']" multiple/>
+      </v-flex>
+    </v-layout>
+    <v-btn color="warning" @click="edit=false">Mégse</v-btn>
     <v-btn color="success" @click="f">Mentés</v-btn>
-    <br>
-    <table class="table">
+    </div>
+    <table class="table" v-else>
+      <tr><td colspan=4>Cuccok listája</td></tr>
       <tr v-for="(row,k) in t">
         <td>{{row.nev}}</td>
         <td>{{row.select.join(', ')}}</td>
@@ -22,6 +33,14 @@
           </i>
         </td>
       </tr>
+      <tr>
+        <td colspan=4>
+           <i v-if="!edit"@click="o={},edit = true"
+            class="material-icons katt">
+          note_add
+            </i>
+        </td> 
+      </tr>   
     </table>   
     </v-container>
   </v-app>
@@ -37,7 +56,8 @@ export default {
   */
   data: () => ({
     o: {},
-    t: []
+    t: [],
+    edit: false
   }),
   methods: {
     f() { 
@@ -50,9 +70,11 @@ export default {
           } else {
             this.t.push(resp.data)
           }
+          this.edit=false
         } )
     },
     szerk(k) {
+      this.edit=true
       this.o = this.t[k]
     },
     torol(k) {
@@ -93,13 +115,15 @@ table {
   border-spacing: 10px;
   border-collapse: separate;
 }
-td {
+td,.td {
   font-family: 'Indie Flower', cursive;
   font-size: 18px;
   margin:15px;
   padding:3px;
+  padding-left:20px;
+  padding-right:20px;
   box-shadow:1px 1px 4px Black;
   border-radius:7px;
-  background-color: rgb(191, 216, 216);
+  background-color: rgb(215, 223, 223);
 }
 </style>
