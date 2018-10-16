@@ -3,7 +3,7 @@
     <v-container class="text-xs-center">
     <v-text-field v-model="o.nev" label="Név"/>
     <v-select v-model="o.select" :items="['Cumó','Cica']" multiple/>
-    <v-btn color="red" @click="f">Mentés</v-btn>
+    <v-btn color="success" @click="f">Mentés</v-btn>
     <br>
     <table class="table">
       <tr v-for="(row,k) in t">
@@ -14,6 +14,8 @@
              class="material-icons katt">
             edit
           </i>
+         </td>
+         <td> 
           <i @click="torol(k)"
              class="material-icons katt">
             delete
@@ -77,6 +79,7 @@ export default {
 }
 </script>
 <style>
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
 i.katt {
   cursor:pointer;
   color:red;
@@ -84,5 +87,19 @@ i.katt {
 i.katt:hover {
   color:brown;
   text-shadow: 1px 1px 4px black;
+}
+table {
+  width:100%;
+  border-spacing: 10px;
+  border-collapse: separate;
+}
+td {
+  font-family: 'Indie Flower', cursive;
+  font-size: 18px;
+  margin:15px;
+  padding:3px;
+  box-shadow:1px 1px 4px Black;
+  border-radius:7px;
+  background-color: rgb(191, 216, 216);
 }
 </style>
