@@ -19,7 +19,8 @@
       <tr><td colspan=4>Cuccok listája</td></tr>
       <tr v-for="(row,k) in t">
         <td>{{row.nev}}</td>
-        <td>{{row.select.join(', ')}}</td>
+        <td v-if="row.select">{{row.select.join(', ')}}</td>
+        <td v-else />
         <td>
           <i @click="szerk(k)"
              class="material-icons katt">

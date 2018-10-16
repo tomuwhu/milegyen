@@ -11,20 +11,20 @@ var db
 
 MongoClient.connect(
     'mongodb://localhost:27017', 
-    {
-        useNewUrlParser: true
-    },
+    { useNewUrlParser: true },
     (err, client) => {
     if (err) throw err
+    console.log('MongoDB Connected')
     db = client.db('urlapadatok')
 })
 
-
 app.get('/', (req, res) => 
-    db.collection('alap').find().toArray(function (err, result) {
-        if (err) throw err
-        res.send(result)
-    })
+    db  .collection('alap')
+        .find()
+        .toArray( (err, result) => {
+            err ? res.send(err)
+                : res.send(result)
+        } )
 )
 
 app.post('/', (req, res) => {
@@ -54,7 +54,6 @@ app.post('/', (req, res) => {
     
 })
 
-
 app.post('/del', (req, res) => {
     db.collection('alap')
         .deleteOne({
@@ -68,6 +67,5 @@ app.post('/del', (req, res) => {
             console.log
         )
 })
-
 
 app.listen(3000)
