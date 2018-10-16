@@ -14,17 +14,16 @@ MongoClient.connect(
     { useNewUrlParser: true },
     (err, client) => {
     if (err) throw err
-    console.log('MongoDB Connected')
     db = client.db('urlapadatok')
 })
 
 app.get('/', (req, res) => 
     db  .collection('alap')
         .find()
-        .toArray( (err, result) => {
+        .toArray( (err, result) => 
             err ? res.send(err)
                 : res.send(result)
-        } )
+        )
 )
 
 app.post('/', (req, res) => {
