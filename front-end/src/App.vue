@@ -2,7 +2,7 @@
   <v-app>
     <v-container class="text-xs-center">
     <v-text-field v-model="o.nev" label="Név"/>
-    <v-select v-model="o.select" :items="['Cumó','Cica']" multiple/>
+    <v-select v-model="o.select" label="Nomi" :items="['Cumó','Cica']" multiple/>
     <v-btn color="success" @click="f">Mentés</v-btn>
     <br>
     <table class="table">
